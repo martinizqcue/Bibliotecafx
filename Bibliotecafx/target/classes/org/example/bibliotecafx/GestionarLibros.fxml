@@ -17,8 +17,8 @@
             <Button layoutX="153.0" layoutY="14.0" onAction="#modificarLibro" text="Modificar Libro" />
             <Button layoutX="299.0" layoutY="14.0" onAction="#eliminarLibro" text="Eliminar Libro" />
             <Button layoutX="459.0" layoutY="455.0" onAction="#volver" text="Volver" />
-         <Button layoutX="14.0" layoutY="68.0" mnemonicParsing="false" text="Buscar Libro" />
-         <Button layoutX="153.0" layoutY="68.0" mnemonicParsing="false" text="Listar Libros Disponibles" />
+         <Button layoutX="14.0" layoutY="68.0" mnemonicParsing="false" onAction="#buscarLibro" text="Buscar Libro" />
+         <Button layoutX="153.0" layoutY="68.0" mnemonicParsing="false" onAction="#listarLibrosDisponibles" text="Listar Libros Disponibles" />
          <Label layoutX="14.0" layoutY="132.0" prefHeight="17.0" prefWidth="37.0" text="Título">
             <font>
                <Font size="14.0" />
@@ -49,7 +49,7 @@
          <TextField id="autor" layoutX="130.0" layoutY="206.0" />
          <TextField id="editorial" layoutX="130.0" layoutY="240.0" />
          <TextField id="anyopublicacion" layoutX="130.0" layoutY="273.0" />
-         <TextArea layoutX="14.0" layoutY="305.0" prefHeight="182.0" prefWidth="438.0" />
+         <TextArea id="descripcionArea" layoutX="14.0" layoutY="305.0" prefHeight="182.0" prefWidth="438.0" />
         </children>
     </AnchorPane>
 </VBox>

@@ -64,11 +64,21 @@ public class AutoresImpl implements AutoresDAO {
     // Método para listar todos los autores
     @Override
     public List<Autores> listarAutores() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM Autores", Autores.class).list();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        List<Autores> autores = null;
+
+        try {
+            transaction = session.beginTransaction();
+            autores = session.createQuery("FROM Autores", Autores.class).list();
+            transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
             e.printStackTrace();
-            return null;
+        } finally {
+            session.close();
         }
+
+        return autores;
     }
 }
