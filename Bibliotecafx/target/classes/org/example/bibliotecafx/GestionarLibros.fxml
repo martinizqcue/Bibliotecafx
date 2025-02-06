@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import org.example.bibliotecafx.GestionarLibrosController?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.Scene?>
+
+<?import java.net.URL?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.GestionarLibrosController" alignment="CENTER" spacing="20">
+    <!-- Aplicar el archivo de estilos -->
+    <stylesheets>
+        <URL value="@estilos/estilos.css"/>
+    </stylesheets>
+
+    <!-- Botones para gestionar libros -->
+    <Button text="Agregar Libro" onAction="#agregarLibro"/>
+    <Button text="Modificar Libro" onAction="#modificarLibro"/>
+    <Button text="Eliminar Libro" onAction="#eliminarLibro"/>
+    <Button text="Volver" onAction="#volver"/>
+</VBox>

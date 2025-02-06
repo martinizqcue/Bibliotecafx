@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.GestionarPrestamosController" alignment="CENTER" spacing="20">
+    <Button text="Agregar Préstamo" onAction="#agregarPrestamo"/>
+    <Button text="Modificar Préstamo" onAction="#modificarPrestamo"/>
+    <Button text="Eliminar Préstamo" onAction="#eliminarPrestamo"/>
+    <Button text="Volver" onAction="#volver"/>
+</VBox>
