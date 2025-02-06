@@ -2,9 +2,15 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="600.0" spacing="20" stylesheets="@estilos/estilos.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.GestionarAutoresController">
-   <AnchorPane prefHeight="555.0" prefWidth="637.0">
+<VBox alignment="CENTER" prefHeight="595.0" prefWidth="600.0" spacing="20" stylesheets="@estilos/estilos.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.GestionarAutoresController">
+   <Label text="AUTORES">
+      <font>
+         <Font name="System Bold" size="27.0" />
+      </font>
+   </Label>
+   <AnchorPane prefHeight="402.0" prefWidth="516.0">
       <children>
       
           <Button layoutX="14.0" layoutY="14.0" onAction="#agregarAutor" text="Agregar Autor" />

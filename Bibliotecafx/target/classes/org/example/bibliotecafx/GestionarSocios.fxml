@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Pos?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.VBox?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.GestionarSociosController" alignment="CENTER" spacing="20">
-    <Button text="Agregar Socio" onAction="#agregarSocio"/>
-    <Button text="Modificar Socio" onAction="#modificarSocio"/>
-    <Button text="Eliminar Socio" onAction="#eliminarSocio"/>
-    <Button text="Volver" onAction="#volver"/>
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="600.0" spacing="20" styleClass="vbox" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.GestionarSociosController">
+    <!-- Aplicar el archivo de estilos -->
+
+    <stylesheets>
+        <URL value="@estilos/estilos.css" />
+    </stylesheets>
+   <Label text="SOCIOS">
+      <font>
+         <Font name="System Bold" size="27.0" />
+      </font>
+   </Label>
+   <AnchorPane prefHeight="719.0" prefWidth="592.0">
+      <children>
+          <Button layoutX="14.0" layoutY="14.0" onAction="#agregarSocio" text="Agregar Socio" />
+         <Button layoutX="14.0" layoutY="78.0" mnemonicParsing="false" text="Buscar Socio" />
+         <Button layoutX="160.0" layoutY="78.0" mnemonicParsing="false" text="Listar Socios" />
+          <Button layoutX="160.0" layoutY="14.0" onAction="#modificarSocio" text="Modificar Socio" />
+          <Button layoutX="419.0" layoutY="14.0" onAction="#eliminarSocio" text="Eliminar Socio" />
+          <Button layoutX="466.0" layoutY="506.0" onAction="#volver" text="Volver" />
+      </children>
+   </AnchorPane>
 </VBox>
