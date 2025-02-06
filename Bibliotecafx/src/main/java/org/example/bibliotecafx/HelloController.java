@@ -26,7 +26,7 @@ public class HelloController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecafx/GestionarLibros.fxml"));
             Stage stage = new Stage();  // Nueva ventana
             stage.setTitle("Gestionar Libros");
-            stage.setScene(new Scene(loader.load()));
+            stage.setScene(new Scene(loader.load(), 600, 600));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,7 +43,7 @@ public class HelloController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecafx/GestionarAutores.fxml"));
             Stage stage = new Stage();  // Nueva ventana
             stage.setTitle("Gestionar Autores");
-            stage.setScene(new Scene(loader.load()));
+            stage.setScene(new Scene(loader.load(), 600, 600));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -60,7 +60,7 @@ public class HelloController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecafx/GestionarSocios.fxml"));
             Stage stage = new Stage();  // Nueva ventana
             stage.setTitle("Gestionar Socios");
-            stage.setScene(new Scene(loader.load()));
+            stage.setScene(new Scene(loader.load(), 600, 600));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,7 +77,7 @@ public class HelloController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecafx/GestionarPrestamos.fxml"));
             Stage stage = new Stage();  // Nueva ventana
             stage.setTitle("Gestionar Préstamos");
-            stage.setScene(new Scene(loader.load()));
+            stage.setScene(new Scene(loader.load(), 600, 600));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

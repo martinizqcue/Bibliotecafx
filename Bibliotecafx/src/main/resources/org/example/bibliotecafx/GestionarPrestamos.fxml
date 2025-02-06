@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Pos?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.VBox?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.GestionarPrestamosController" alignment="CENTER" spacing="20">
-    <Button text="Agregar Préstamo" onAction="#agregarPrestamo"/>
-    <Button text="Modificar Préstamo" onAction="#modificarPrestamo"/>
-    <Button text="Eliminar Préstamo" onAction="#eliminarPrestamo"/>
-    <Button text="Volver" onAction="#volver"/>
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="600.0" spacing="20" styleClass="vbox" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.GestionarPrestamosController">
+    <!-- Aplicar el archivo de estilos -->
+
+    <stylesheets>
+        <URL value="@estilos/estilos.css" />
+    </stylesheets>
+   <AnchorPane prefHeight="611.0" prefWidth="574.0">
+      <children>
+          <Button layoutX="14.0" layoutY="14.0" onAction="#agregarPrestamo" text="Agregar Préstamo a Socio" />
+          <Button layoutX="242.0" layoutY="14.0" onAction="#modificarPrestamo" text="Listar Libros Prestados" />
+          <Button layoutX="14.0" layoutY="74.0" onAction="#eliminarPrestamo" text="Listar Historial Prestamos Socio" />
+          <Button layoutX="466.0" layoutY="506.0" onAction="#volver" text="Volver" />
+      </children>
+   </AnchorPane>
 </VBox>

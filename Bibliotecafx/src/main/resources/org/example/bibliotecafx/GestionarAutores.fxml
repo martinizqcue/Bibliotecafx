@@ -3,9 +3,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="212.0" prefWidth="364.0" spacing="20" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="org.example.bibliotecafx.GestionarAutoresController">
-    <Button onAction="#agregarAutor" text="Agregar Autor" />
-    <Button onAction="#modificarAutor" text="Modificar Autor" />
-    <Button onAction="#eliminarAutor" text="Eliminar Autor" />
-    <Button onAction="#volver" text="Volver" />
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="600.0" spacing="20" stylesheets="@estilos/estilos.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.GestionarAutoresController">
+   <AnchorPane prefHeight="555.0" prefWidth="637.0">
+      <children>
+      
+          <Button layoutX="14.0" layoutY="14.0" onAction="#agregarAutor" text="Agregar Autor" />
+          <Button layoutX="153.0" layoutY="14.0" onAction="#modificarAutor" text="Modificar Autor" />
+          <Button layoutX="299.0" layoutY="14.0" onAction="#eliminarAutor" text="Eliminar Autor" />
+         <Button layoutX="48.0" layoutY="68.0" mnemonicParsing="false" text="Buscar Autor Nombre" />
+         <Button layoutX="262.0" layoutY="68.0" mnemonicParsing="false" text="Listar Autores" />
+          <Button layoutX="466.0" layoutY="501.0" onAction="#volver" text="Volver" />
+      </children>
+   </AnchorPane>
 </VBox>

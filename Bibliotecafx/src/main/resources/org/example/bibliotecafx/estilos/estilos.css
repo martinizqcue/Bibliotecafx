@@ -1,11 +1,11 @@
 /* estilos.css */
-.vbox {
+VBox {
     -fx-background-color: linear-gradient(to bottom, #f0f8ff, #b0e0e6); /* Degradado suave de azul claro */
     -fx-padding: 20px; /* Espaciado interno */
     -fx-background-radius: 10px; /* Bordes redondeados */
 }
 /* Estilo para los botones */
-.button {
+Button {
     -fx-background-color: #A8E6CF; /* Verde menta suave */
     -fx-text-fill: #000000; /* Texto en negro */
     -fx-font-size: 14px; /* Tamaño de fuente */
@@ -16,11 +16,11 @@
 }
 
 /* Estilo para los botones cuando se pasa el mouse sobre ellos */
-.button:hover {
+Button:hover {
     -fx-background-color: #81C784; /* Verde más oscuro para hover */
 }
 
 /* Estilo para los botones cuando se hace clic */
-.button:pressed {
+Button:pressed {
     -fx-background-color: #66BB6A; /* Verde más oscuro para el estado presionado */
 }
