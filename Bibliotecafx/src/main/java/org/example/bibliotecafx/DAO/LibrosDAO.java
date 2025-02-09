@@ -1,11 +1,14 @@
 package org.example.bibliotecafx.DAO;
 
+import org.example.bibliotecafx.entities.Autores;
 import org.example.bibliotecafx.entities.Libros;
 
 import java.util.List;
 
 public interface LibrosDAO {
     // Operación para agregar un libro
+    Libros save(Libros libro);
+
     void agregarLibro(Libros libro);
 
     // Operación para modificar un libro
@@ -19,4 +22,5 @@ public interface LibrosDAO {
 
     // Operación para listar todos los libros no prestados
     List<Libros> listarLibrosDisponibles();
+
 }

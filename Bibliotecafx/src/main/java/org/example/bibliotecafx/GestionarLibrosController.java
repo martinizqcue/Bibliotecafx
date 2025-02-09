@@ -23,14 +23,18 @@ public class GestionarLibrosController {
     @FXML private TextField editorialField;
     @FXML private TextField anioField;
     @FXML private TextArea descripcionArea;
-
+    @FXML
     private LibrosImpl librosDAO = new LibrosImpl();
+    @FXML
     private AutoresImpl autoresDAO = new AutoresImpl();
 
+
     // Método para inicializar el ComboBox con autores
+
+    @FXML
     public void initialize() {
-        List<Autores> autores = autoresDAO.listarAutores();
-        autorComboBox.getItems().addAll(autores);
+        //List<Autores> autores = autoresDAO.listarAutores();
+        //autorComboBox.getItems().addAll(autores);
     }
 
     // Método para agregar un libro
@@ -117,6 +121,7 @@ public class GestionarLibrosController {
 
 
     // Método para mostrar un mensaje de alerta
+    @FXML
     private void mostrarMensaje(String titulo, String mensaje) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(titulo);

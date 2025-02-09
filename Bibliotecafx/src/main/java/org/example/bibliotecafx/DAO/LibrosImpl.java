@@ -1,6 +1,6 @@
 package org.example.bibliotecafx.DAO;
 
-import org.example.bibliotecafx.DAO.LibrosDAO;
+import org.example.bibliotecafx.entities.Autores;
 import org.example.bibliotecafx.entities.Libros;
 import org.example.bibliotecafx.Util.HibernateUtil;
 import org.hibernate.Session;
@@ -9,6 +9,17 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class LibrosImpl implements LibrosDAO {
+
+    @Override
+    public Libros save(Libros libro) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(libro);
+        session.getTransaction().commit();
+        session.close();
+        return libro;
+    }
+
 
     @Override
     public void agregarLibro(Libros libro) {

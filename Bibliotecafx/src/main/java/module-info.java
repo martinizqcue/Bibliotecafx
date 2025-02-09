@@ -8,8 +8,7 @@ module org.example.bibliotecafx {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
-    requires eu.hansolo.tilesfx;
-    requires com.almasb.fxgl.all;
+
     requires org.hibernate.orm.core;
     requires jakarta.persistence;
     requires java.naming;

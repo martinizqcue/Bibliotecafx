@@ -5,7 +5,17 @@ import java.util.List;
 
 public interface AutoresDAO {
 
-    void agregarAutor(Autores autor);
+    List<Autores> findAll();
+
+    List<Autores> findByNombre(String Nombre);
+
+    Autores save(Autores Autor);
+
+    Autores update(Autores Autor);
+
+    boolean delete(Autores Autor);
+
+    /*void agregarAutor(Autores autor);
 
     void modificarAutor(Autores autor);
 
@@ -13,5 +23,5 @@ public interface AutoresDAO {
 
     Autores buscarAutorPorNombre(String nombre);
 
-    List<Autores> listarAutores();
+    List<Autores> listarAutores();*/
 }
