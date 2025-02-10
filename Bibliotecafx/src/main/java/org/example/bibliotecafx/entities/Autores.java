@@ -4,17 +4,17 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Autor")
+@Table(name = "Autores")
 public class Autores implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(name = "nombre")
     private String nombre;
 
-    @Column(nullable = false)
+    @Column(name = "nacionalidad")
     private String nacionalidad;
 
     // Constructor vacío
@@ -27,13 +27,8 @@ public class Autores implements Serializable {
         this.nacionalidad = nacionalidad;
     }
 
-    // Getters y Setters
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getNombre() {
@@ -52,13 +47,8 @@ public class Autores implements Serializable {
         this.nacionalidad = nacionalidad;
     }
 
-    // Método toString
     @Override
     public String toString() {
-        return "Autor{" +
-                "ID=" + id +
-                ", Nombre='" + nombre + '\'' +
-                ", Nacionalidad='" + nacionalidad + '\'' +
-                '}';
+        return nombre + " - " + nacionalidad;
     }
 }

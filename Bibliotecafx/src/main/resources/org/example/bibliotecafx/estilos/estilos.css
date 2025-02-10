@@ -4,6 +4,11 @@ VBox {
     -fx-padding: 20px; /* Espaciado interno */
     -fx-background-radius: 10px; /* Bordes redondeados */
 }
+AnchorPane {
+    -fx-background-color: linear-gradient(to bottom, #f0f8ff, #b0e0e6); /* Degradado suave de azul claro */
+    -fx-padding: 20px; /* Espaciado interno */
+    -fx-background-radius: 10px; /* Bordes redondeados */
+}
 /* Estilo para los botones */
 Button {
     -fx-background-color: #A8E6CF; /* Verde menta suave */

@@ -15,13 +15,5 @@ public interface AutoresDAO {
 
     boolean delete(Autores Autor);
 
-    /*void agregarAutor(Autores autor);
 
-    void modificarAutor(Autores autor);
-
-    void eliminarAutor(Integer id);
-
-    Autores buscarAutorPorNombre(String nombre);
-
-    List<Autores> listarAutores();*/
 }

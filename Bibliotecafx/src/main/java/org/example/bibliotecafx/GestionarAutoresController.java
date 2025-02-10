@@ -1,18 +1,16 @@
 package org.example.bibliotecafx;
 
+import org.example.bibliotecafx.DAO.AutoresImpl;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.event.ActionEvent;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.example.bibliotecafx.DAO.AutoresImpl;
+import javafx.scene.control.Alert.AlertType;
 import org.example.bibliotecafx.entities.Autores;
 
 import java.util.List;
@@ -22,7 +20,7 @@ public class GestionarAutoresController {
     @FXML
     private TextField txtNombre, txtNacionalidad, txtNombreMod, txtNacionalidadMod, txtBuscar;
     @FXML
-    private Button btnGuardar, btnGuardarMod, btnBuscar;
+    private Button btnGuardar, btnGuardarMod, btnBuscar, btnEliminar;
     @FXML
     private Label lblMensaje;
     @FXML
@@ -36,9 +34,8 @@ public class GestionarAutoresController {
     private Autores autorSeleccionado;
 
     @FXML
-    private void volver(ActionEvent event) throws Exception {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+    private void volver() throws Exception {
+        HelloApplication.switchScene("/org/example/bibliotecafx/hello-view.fxml");
     }
 
     @FXML
@@ -69,6 +66,7 @@ public class GestionarAutoresController {
             txtNacionalidadMod.setText(autorSeleccionado.getNacionalidad());
         }
     }
+
     @FXML
     public void modificarAutor() {
         System.out.println("Botón presionado: modificarAutor() ejecutado");
@@ -106,6 +104,7 @@ public class GestionarAutoresController {
             }
         });
     }
+
     @FXML
     public void buscarAutor() {
         String busqueda = txtBuscar.getText();
@@ -114,7 +113,6 @@ public class GestionarAutoresController {
         ObservableList<Autores> autores = FXCollections.observableArrayList(autoresEncontrados);
         listResultados.setItems(autores);
     }
-
 
 
     public void actualizarListaAutores() {
@@ -152,38 +150,34 @@ public class GestionarAutoresController {
         listAutoresModificar.setOnMouseClicked(event -> seleccionarAutorModificar());
         actualizarListaAutores();
     }
-    /*@FXML
-    public void agregarAutor() {
-        mostrarMensaje("Agregar Autor", "Se agregó un nuevo autor.");
-    }
 
-    @FXML
-    public void modificarAutor() {
-        mostrarMensaje("Modificar Autor", "Se modificó un autor.");
-    }
 
     @FXML
     public void eliminarAutor() {
-        mostrarMensaje("Eliminar Autor", "Se eliminó un autor.");
+        Autores autorSeleccionado = listAutoresEliminar.getSelectionModel().getSelectedItem();
+
+        if (autorSeleccionado == null) {
+            mostrarAlerta("Error", "Debe seleccionar un autor para eliminar", Alert.AlertType.ERROR);
+            return;
+        }
+
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION, "¿Seguro que quieres eliminar este autor?", ButtonType.YES, ButtonType.NO);
+        confirmacion.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.YES) {
+                AutoresImpl autorDao = new AutoresImpl();
+                boolean eliminado = autorDao.delete(autorSeleccionado);
+
+                if (eliminado) {
+                    lblMensaje.setText("Autor eliminado con éxito");
+                    lblMensaje.setStyle("-fx-text-fill: red;");
+                    actualizarListaAutores(); // Refresca la lista
+                } else {
+                    mostrarAlerta("Error", "No se pudo eliminar el autor.", Alert.AlertType.ERROR);
+                }
+            }
+        });
     }
 
-    @FXML
-    public void volver(ActionEvent event) {
-        // Cerrar la ventana de gestión de autores
-        cerrarVentana(event);
-    }
 
-    private void mostrarMensaje(String titulo, String mensaje) {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
 
-    private void cerrarVentana(ActionEvent event) {
-        // Obtener el Stage actual (ventana) a partir del evento
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
-    }*/
 }

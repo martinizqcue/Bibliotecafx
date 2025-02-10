@@ -2,14 +2,18 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" stylesheets="@estilos/estilos.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.GestionarAutoresController">
 
     <children>
         <!-- Título -->
-        <Label fx:id="subtitulo" layoutX="250.0" layoutY="20.0" prefHeight="55.0" prefWidth="400.0" text="GESTIÓN DE AUTORES" />
+        <Label fx:id="subtitulo" alignment="CENTER" layoutX="322.0" layoutY="14.0" prefHeight="55.0" prefWidth="256.0" text="GESTIÓN DE AUTORES" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
         <!-- Botón Salir -->
-        <Button layoutX="785.0" layoutY="527.0" mnemonicParsing="false" onAction="#volver" prefHeight="39.0" prefWidth="85.0" styleClass="button1" text="VOLVER" />
+        <Button layoutX="750.0" layoutY="538.0" mnemonicParsing="false" onAction="#volver" prefHeight="40.0" prefWidth="114.0" styleClass="button1" text="VOLVER" />
 
         <!-- TabPane -->
         <TabPane layoutX="55.0" layoutY="77.0" prefHeight="446.0" prefWidth="789.0" tabClosingPolicy="UNAVAILABLE">
@@ -39,7 +43,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="287.0" prefWidth="558.0">
                             <children>
-                                <ListView  fx:id="listAutoresModificar" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0" />
+                                <ListView fx:id="listAutoresModificar" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0" />
 
                                 <Label layoutX="297.0" layoutY="78.0" text="Nombre:" />
                                 <TextField fx:id="txtNombreMod" layoutX="420.0" layoutY="74.0" prefWidth="200.0" />
@@ -47,7 +51,7 @@
                                 <Label layoutX="285.0" layoutY="150.0" text="Nacionalidad:" />
                                 <TextField fx:id="txtNacionalidadMod" layoutX="420.0" layoutY="146.0" prefWidth="200.0" />
 
-                                <Button fx:id="btnGuardarMod" onAction="#modificarAutor" layoutX="337.0" layoutY="337.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="114.0" text="Guardar" />
+                                <Button fx:id="btnGuardarMod" layoutX="337.0" layoutY="337.0" mnemonicParsing="false" onAction="#modificarAutor" prefHeight="49.0" prefWidth="114.0" text="Guardar" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -60,7 +64,7 @@
                             <children>
                                 <ListView fx:id="listAutoresEliminar" layoutX="244.0" layoutY="70.0" prefHeight="200.0" prefWidth="300.0" />
 
-                                <Button fx:id="btnEliminar" layoutX="360.0" layoutY="319.0" mnemonicParsing="false" text="Eliminar" />
+                                <Button fx:id="btnEliminar" layoutX="360.0" layoutY="319.0" mnemonicParsing="false" onAction="#eliminarAutor" text="Eliminar" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -75,7 +79,7 @@
                                 <Label layoutX="180.0" layoutY="103.0" text="Nombre" />
                                 <TextField fx:id="txtBuscar" layoutX="240.0" layoutY="99.0" prefWidth="220.0" />
 
-                                <Button onAction="#buscarAutor" fx:id="btnBuscar" layoutX="514.0" layoutY="97.0" mnemonicParsing="false" text="Buscar" />
+                                <Button fx:id="btnBuscar" layoutX="514.0" layoutY="97.0" mnemonicParsing="false" onAction="#buscarAutor" text="Buscar" />
 
                                 <ListView fx:id="listResultados" layoutX="180.0" layoutY="139.0" prefHeight="220.0" prefWidth="400.0" />
                             </children>

@@ -10,16 +10,12 @@ import java.io.IOException;
 
 public class HelloController {
 
-    @FXML
-    private Label welcomeText;
 
-    @FXML
-    private Label statusLabel;
+
+
 
     @FXML
     public void onGestionarLibros() {
-        // Lógica para gestionar libros
-        statusLabel.setText("Acción: Gestionar Libros");
 
         try {
             // Cargar la vista de gestionar libros
@@ -34,26 +30,14 @@ public class HelloController {
     }
 
     @FXML
-    public void onGestionarAutores() {
-        // Lógica para gestionar autores
-        statusLabel.setText("Acción: Gestionar Autores");
+    public void onGestionarAutores() throws Exception {
+        HelloApplication.switchScene("/org/example/bibliotecafx/GestionarAutores.fxml");
 
-        try {
-            // Cargar la vista de gestionar autores
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecafx/GestionarAutores.fxml"));
-            Stage stage = new Stage();  // Nueva ventana
-            stage.setTitle("Gestionar Autores");
-            stage.setScene(new Scene(loader.load(), 600, 600));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
     public void onGestionarSocios() {
-        // Lógica para gestionar socios
-        statusLabel.setText("Acción: Gestionar Socios");
+
 
         try {
             // Cargar la vista de gestionar socios
@@ -69,8 +53,7 @@ public class HelloController {
 
     @FXML
     public void onGestionarPrestamos() {
-        // Lógica para gestionar préstamos
-        statusLabel.setText("Acción: Gestionar Préstamos");
+
 
         try {
             // Cargar la vista de gestionar préstamos

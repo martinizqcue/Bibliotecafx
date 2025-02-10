@@ -1,13 +1,7 @@
 module org.example.bibliotecafx {
     requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.web;
-
-    requires org.controlsfx.controls;
-    requires com.dlsc.formsfx;
-    requires net.synedra.validatorfx;
-    requires org.kordamp.ikonli.javafx;
-    requires org.kordamp.bootstrapfx.core;
+    requires javafx.graphics;
 
     requires org.hibernate.orm.core;
     requires jakarta.persistence;
@@ -18,4 +12,5 @@ module org.example.bibliotecafx {
 
     exports org.example.bibliotecafx;
     exports org.example.bibliotecafx.entities;
+
 }
