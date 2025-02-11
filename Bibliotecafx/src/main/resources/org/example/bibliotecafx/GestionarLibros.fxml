@@ -4,52 +4,129 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.GestionarLibrosController" alignment="CENTER" prefHeight="600.0" prefWidth="600.0" spacing="20" stylesheets="@estilos/estilos.css" xmlns="http://javafx.com/javafx/17.0.12" >
-   <Label prefHeight="39.0" prefWidth="103.0" text="LIBROS">
-      <font>
-         <Font name="System Bold" size="27.0" />
-      </font>
-   </Label>
-    <AnchorPane prefHeight="555.0" prefWidth="637.0" >
-        <children>
+<AnchorPane prefHeight="600.0" prefWidth="900.0" stylesheets="@estilos/estilos.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.GestionarLibrosController">
 
-            <Button layoutX="14.0" layoutY="14.0" onAction="#agregarLibro" text="Agregar Libro" />
-            <Button layoutX="153.0" layoutY="14.0" onAction="#modificarLibro" text="Modificar Libro" />
-            <Button layoutX="299.0" layoutY="14.0" onAction="#eliminarLibro" text="Eliminar Libro" />
-            <Button layoutX="459.0" layoutY="455.0" onAction="#volver" text="Volver" />
-         <Button layoutX="14.0" layoutY="68.0" mnemonicParsing="false" onAction="#buscarLibro" text="Buscar Libro" />
-         <Button layoutX="153.0" layoutY="68.0" mnemonicParsing="false" onAction="#listarLibrosDisponibles" text="Listar Libros Disponibles" />
-         <Label layoutX="14.0" layoutY="132.0" prefHeight="17.0" prefWidth="37.0" text="Título">
+    <children>
+        <!-- Título -->
+        <Label fx:id="subtitulo" alignment="CENTER" layoutX="322.0" layoutY="14.0" prefHeight="55.0" prefWidth="256.0" text="GESTIÓN DE LIBROS" textAlignment="CENTER">
             <font>
-               <Font size="14.0" />
-            </font>
-         </Label>
-         <Label layoutX="14.0" layoutY="170.0" prefHeight="20.0" prefWidth="37.0" text="ISBN">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Label>
-         <Label layoutX="14.0" layoutY="208.0" text="Autor">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Label>
-         <Label layoutX="14.0" layoutY="242.0" text="Editorial">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Label>
-         <Label layoutX="14.0" layoutY="275.0" text="Año Publicación">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Label>
-         <TextField id="titulo" layoutX="130.0" layoutY="130.0" />
-         <TextField id="isbn" layoutX="130.0" layoutY="168.0" />
-         <TextField id="autor" layoutX="130.0" layoutY="206.0" />
-         <TextField id="editorial" layoutX="130.0" layoutY="240.0" />
-         <TextField id="anyopublicacion" layoutX="130.0" layoutY="273.0" />
-         <TextArea id="descripcionArea" layoutX="14.0" layoutY="305.0" prefHeight="182.0" prefWidth="438.0" />
-        </children>
-    </AnchorPane>
-</VBox>
+                <Font name="System Bold" size="24.0" />
+            </font></Label>
+        <!-- Botón Salir -->
+        <Button layoutX="678.0" layoutY="533.0" mnemonicParsing="false" onAction="#volver" prefHeight="40.0" prefWidth="114.0" styleClass="button1" text="VOLVER" />
+
+        <!-- TabPane -->
+        <TabPane layoutX="55.0" layoutY="77.0" prefHeight="446.0" prefWidth="789.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <!-- Tab Añadir -->
+                <Tab text="Añadir">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="667.0">
+
+                            <Label fx:id="lblMensaje" layoutX="263.0" layoutY="257.0" prefHeight="45.0" prefWidth="262.0" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: green; -fx-font-family: 'Segoe UI', sans-serif;  -fx-padding: 10px;" text="" />
+
+                            <children>
+                                <Label layoutX="184.0" layoutY="80.0" text="Título:" />
+                                <TextField fx:id="txtTitulo" layoutX="333.0" layoutY="80.0" prefWidth="200.0" />
+
+                                <Label layoutX="184.0" layoutY="120.0" text="ISBN:" />
+                                <TextField fx:id="txtISBN" layoutX="333.0" layoutY="120.0" prefWidth="200.0" />
+
+                                <Label layoutX="184.0" layoutY="160.0" text="Autor:" />
+                                <TextField fx:id="txtAutor" layoutX="333.0" layoutY="160.0" prefWidth="200.0" />
+
+                                <Label layoutX="184.0" layoutY="200.0" text="Editorial:" />
+                                <TextField fx:id="txtEditorial" layoutX="333.0" layoutY="200.0" prefWidth="200.0" />
+
+                                <Label layoutX="184.0" layoutY="240.0" text="Año de Publicación:" />
+                                <TextField fx:id="txtAnioPublicacion" layoutX="333.0" layoutY="240.0" prefWidth="200.0" />
+
+                                <Button fx:id="btnGuardar" layoutX="333.0" layoutY="320.0" mnemonicParsing="false" onAction="#guardarLibro" prefHeight="64.0" prefWidth="124.0" text="Guardar" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <!-- Tab Modificar -->
+                <Tab text="Modificar">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="287.0" prefWidth="558.0">
+                            <children>
+                                <ListView fx:id="listLibrosModificar" layoutX="20.0" layoutY="20.0" prefHeight="239.0" prefWidth="747.0" />
+
+                                <Label layoutX="7.0" layoutY="283.0" prefHeight="17.0" prefWidth="36.0" text="Título:" />
+                                <TextField fx:id="txtTituloMod" layoutX="45.0" layoutY="279.0" prefWidth="200.0" />
+
+                                <Label layoutX="9.0" layoutY="322.0" prefHeight="17.0" prefWidth="31.0" text="ISBN:" />
+                                <TextField fx:id="txtISBNMod" layoutX="45.0" layoutY="318.0" prefWidth="200.0" />
+
+                                <Label layoutX="8.0" layoutY="357.0" text="Autor:" />
+                                <TextField fx:id="txtAutorMod" layoutX="45.0" layoutY="353.0" prefWidth="200.0" />
+
+                                <Label layoutX="312.0" layoutY="283.0" text="Editorial:" />
+                                <TextField fx:id="txtEditorialMod" layoutX="364.0" layoutY="279.0" prefWidth="200.0" />
+
+                                <Label layoutX="253.0" layoutY="322.0" text="Año de Publicación:" />
+                                <TextField fx:id="txtAnioPublicacionMod" layoutX="364.0" layoutY="318.0" prefWidth="200.0" />
+
+                                <Button fx:id="btnGuardarMod" layoutX="634.0" layoutY="281.0" mnemonicParsing="false" onAction="#modificarLibro" prefHeight="75.0" prefWidth="122.0" text="Guardar" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <!-- Tab Eliminar -->
+                <Tab text="Eliminar">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="287.0" prefWidth="558.0">
+                            <children>
+                                <ListView fx:id="listLibrosEliminar" layoutX="71.0" layoutY="70.0" prefHeight="200.0" prefWidth="676.0" />
+
+                                <Button fx:id="btnEliminar" layoutX="325.0" layoutY="298.0" mnemonicParsing="false" onAction="#eliminarLibro" prefHeight="67.0" prefWidth="140.0" text="Eliminar" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <!-- Tab Buscar -->
+                <Tab text="Buscar">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="287.0" prefWidth="558.0">
+                            <children>
+
+                                <Label layoutX="133.0" layoutY="103.0" prefHeight="17.0" prefWidth="101.0" text="Título/Autor/ISBN" />
+                                <TextField fx:id="txtBuscar" layoutX="242.0" layoutY="99.0" prefWidth="220.0" />
+
+                                <Button fx:id="btnBuscar" layoutX="512.0" layoutY="83.0" mnemonicParsing="false" onAction="#buscarLibro" text="Buscar" />
+
+                                <ListView fx:id="listResultados" layoutX="67.0" layoutY="139.0" prefHeight="220.0" prefWidth="686.0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <!-- Tab Listado -->
+                <Tab text="Listado">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="287.0" prefWidth="558.0">
+                            <children>
+
+                                <TableView fx:id="tablaLibros" layoutX="77.0" layoutY="25.0" prefHeight="327.0" prefWidth="634.0">
+                                    <columns>
+                                        <TableColumn fx:id="colTitulo" prefWidth="176.0" text="Título" />
+                                        <TableColumn fx:id="colISBN" prefWidth="91.0" text="ISBN" />
+                                        <TableColumn fx:id="colAutor" prefWidth="88.0" text="Autor" />
+                                        <TableColumn fx:id="colEditorial" prefWidth="102.0" text="Editorial" />
+                                        <TableColumn fx:id="colAnioPublicacion" prefWidth="176.0" text="Año Publicación" />
+                                    </columns>
+                                </TableView>
+
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

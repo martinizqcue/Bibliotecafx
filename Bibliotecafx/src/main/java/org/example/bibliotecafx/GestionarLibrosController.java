@@ -1,139 +1,203 @@
 package org.example.bibliotecafx;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import org.example.bibliotecafx.DAO.LibrosImpl;
 import org.example.bibliotecafx.DAO.AutoresImpl;
-import org.example.bibliotecafx.entities.Libros;
+import org.example.bibliotecafx.DAO.LibrosImpl;
 import org.example.bibliotecafx.entities.Autores;
-import javafx.event.ActionEvent;
-import javafx.scene.Node;
-import javafx.stage.Stage;
+import org.example.bibliotecafx.entities.Libros;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.util.Duration;
+import javafx.scene.control.Alert.AlertType;
+
 import java.util.List;
 
 public class GestionarLibrosController {
 
-    @FXML private TextField tituloField;
-    @FXML private TextField isbnField;
-    @FXML private ComboBox<Autores> autorComboBox;
-    @FXML private TextField editorialField;
-    @FXML private TextField anioField;
-    @FXML private TextArea descripcionArea;
     @FXML
-    private LibrosImpl librosDAO = new LibrosImpl();
+    private TextField txtTitulo, txtISBN, txtAutor, txtEditorial, txtAnioPublicacion, txtTituloMod, txtISBNMod, txtAutorMod, txtBuscar, txtEditorialMod, txtAnioPublicacionMod;
     @FXML
-    private AutoresImpl autoresDAO = new AutoresImpl();
+    private Button btnGuardar, btnGuardarMod, btnBuscar, btnEliminar;
+    @FXML
+    private Label lblMensaje;
+    @FXML
+    private TableView<Libros> tablaLibros;
+    @FXML
+    private TableColumn<Libros, String> colTitulo, colISBN, colAutor, colEditorial, colAnioPublicacion;
+    @FXML
+    private ListView<Libros> listLibrosEliminar, listLibrosModificar, listResultados;
 
-
-    // Método para inicializar el ComboBox con autores
+    private Libros libroSeleccionado;
 
     @FXML
-    public void initialize() {
-        //List<Autores> autores = autoresDAO.listarAutores();
-        //autorComboBox.getItems().addAll(autores);
+    private void volver() throws Exception {
+        HelloApplication.switchScene("/org/example/bibliotecafx/hello-view.fxml");
     }
 
-    // Método para agregar un libro
+    // Guardar un nuevo libro
     @FXML
-    public void agregarLibro() {
-        String isbn = isbnField.getText();
-        String titulo = tituloField.getText();
-        Autores autor = autorComboBox.getValue();
-        String editorial = editorialField.getText();
-        int anio = Integer.parseInt(anioField.getText());
+    private void guardarLibro() {
+        String nombreAutor = txtAutor.getText();
+        Autores autor = new AutoresImpl().buscarPorNombre(nombreAutor);  // Asegúrate de que este método exista
 
-        // Aquí no se usa descripcion porque no forma parte de la entidad 'Libro'
-        Libros libro = new Libros(isbn, titulo, autor, editorial, anio);
-        librosDAO.agregarLibro(libro);
-        mostrarMensaje("Agregar Libro", "Se ha agregado un nuevo libro.");
-    }
+        if (autor != null) {
+            Libros libro = new Libros(
+                    txtISBN.getText(),
+                    txtTitulo.getText(),
+                    autor,  // Aquí usamos el objeto Autor
+                    txtEditorial.getText(),
+                    Integer.parseInt(txtAnioPublicacion.getText())
+            );
+            // Crear una instancia de LibrosImpl
+            LibrosImpl librosImpl = new LibrosImpl();
 
-    // Método para modificar un libro
-    @FXML
-    public void modificarLibro() {
-        String isbn = isbnField.getText();
-        Libros libro = librosDAO.buscarLibro(isbn);
-        if (libro != null) {
-            libro.setTitulo(tituloField.getText());
-            libro.setAutor(autorComboBox.getValue());
-            libro.setEditorial(editorialField.getText());
-            libro.setAnioPublicacion(Integer.parseInt(anioField.getText()));
-            librosDAO.modificarLibro(libro);
-            mostrarMensaje("Modificar Libro", "Se ha modificado el libro.");
-        } else {
-            mostrarMensaje("Error", "Libro no encontrado.");
-        }
-    }
-
-    // Método para eliminar un libro
-    @FXML
-    public void eliminarLibro() {
-        String isbn = isbnField.getText();
-        librosDAO.eliminarLibro(isbn);
-        mostrarMensaje("Eliminar Libro", "Se ha eliminado el libro.");
-    }
-
-    // Método para buscar un libro
-    @FXML
-    public void buscarLibro() {
-        String isbn = isbnField.getText();
-        Libros libro = librosDAO.buscarLibro(isbn);
-        if (libro != null) {
-            tituloField.setText(libro.getTitulo());
-            autorComboBox.setValue(libro.getAutor());
-            editorialField.setText(libro.getEditorial());
-            anioField.setText(String.valueOf(libro.getAnioPublicacion()));
-            descripcionArea.setText(libro.getTitulo() + " por " + libro.getAutor().getNombre() + "\n" +
-                    "Editorial: " + libro.getEditorial() + "\n" +
-                    "Año de publicación: " + libro.getAnioPublicacion());
-        } else {
-            mostrarMensaje("No encontrado", "Libro no encontrado.");
-        }
-    }
-
-    // Método para listar todos los libros disponibles
-    @FXML
-    public void listarLibrosDisponibles() {
-        List<Libros> libros = librosDAO.listarLibrosDisponibles();
-        StringBuilder listaLibros = new StringBuilder();
-
-        // Si no hay libros disponibles
-        if (libros.isEmpty()) {
-            listaLibros.append("No hay libros disponibles.");
-        } else {
-            // Agregar los detalles de los libros al StringBuilder
-            for (Libros libro : libros) {
-                listaLibros.append("Título: ").append(libro.getTitulo()).append("\n")
-                        .append("ISBN: ").append(libro.getIsbn()).append("\n")
-                        .append("Autor: ").append(libro.getAutor().getNombre()).append("\n")
-                        .append("Editorial: ").append(libro.getEditorial()).append("\n")
-                        .append("Año: ").append(libro.getAnioPublicacion()).append("\n\n");
+            if (librosImpl.guardar(libro)) {  // Llamada no estática
+                lblMensaje.setText("Libro guardado correctamente.");
+                lblMensaje.setStyle("-fx-text-fill: green;");
+            } else {
+                lblMensaje.setText("Error al guardar el libro.");
+                lblMensaje.setStyle("-fx-text-fill: red;");
             }
+            actualizarTabla();
+            actualizarListaLibros();
+        } else {
+            lblMensaje.setText("Autor no encontrado.");
+            lblMensaje.setStyle("-fx-text-fill: red;");
         }
-
-        // Mostrar la lista de libros en el TextArea
-        descripcionArea.setText(listaLibros.toString());
     }
 
 
-    // Método para mostrar un mensaje de alerta
+
+    // Modificar un libro existente
     @FXML
-    private void mostrarMensaje(String titulo, String mensaje) {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
+    private void modificarLibro() {
+        String nombreAutor = txtAutorMod.getText();
+        Autores autor = new AutoresImpl().buscarPorNombre(nombreAutor);  // Asegúrate de que este método exista
+
+        if (autor != null) {
+            libroSeleccionado.setTitulo(txtTituloMod.getText());
+            libroSeleccionado.setIsbn(txtISBNMod.getText());
+            libroSeleccionado.setAutor(autor);  // Aquí actualizas la relación con el autor
+            libroSeleccionado.setEditorial(txtEditorialMod.getText());
+            libroSeleccionado.setAnioPublicacion(Integer.parseInt(txtAnioPublicacionMod.getText()));
+
+            // Crear una instancia de LibrosImpl
+            LibrosImpl librosImpl = new LibrosImpl();
+
+            if (librosImpl.modificar(libroSeleccionado)) {  // Llamada no estática
+                lblMensaje.setText("Libro modificado correctamente.");
+                lblMensaje.setStyle("-fx-text-fill: green;");
+            } else {
+                lblMensaje.setText("Error al modificar el libro.");
+                lblMensaje.setStyle("-fx-text-fill: red;");
+            }
+            actualizarTabla();
+            actualizarListaLibros();
+        } else {
+            lblMensaje.setText("Autor no encontrado.");
+            lblMensaje.setStyle("-fx-text-fill: red;");
+        }
     }
 
-    // Método para cerrar la ventana actual
+
+
+    // Eliminar un libro
     @FXML
-    public void volver(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+    private void eliminarLibro() {
+        libroSeleccionado = listLibrosEliminar.getSelectionModel().getSelectedItem();
+        if (new LibrosImpl().eliminar(libroSeleccionado)) {
+            lblMensaje.setText("Libro eliminado correctamente.");
+            lblMensaje.setStyle("-fx-text-fill: green;");
+        } else {
+            lblMensaje.setText("Error al eliminar el libro.");
+            lblMensaje.setStyle("-fx-text-fill: red;");
+        }
+        actualizarTabla();
+        actualizarListaLibros();
     }
+
+    // Buscar libros
+    @FXML
+    private void buscarLibro() {
+        String query = txtBuscar.getText();
+        if (!query.isEmpty()) {
+            List<Libros> resultados = null;
+
+            // Realizamos la búsqueda directamente, sin validar si es ISBN
+            resultados = new LibrosImpl().buscarPorIsbn(query);  // Buscar directamente por ISBN
+            if (resultados == null || resultados.isEmpty()) {
+                // Si no se encuentra por ISBN, buscamos por título
+                resultados = new LibrosImpl().buscarPorTitulo(query);
+                if (resultados == null || resultados.isEmpty()) {
+                    // Si no se encuentra por título, buscamos por autor
+                    resultados = new LibrosImpl().buscarPorAutor(query);
+                }
+            }
+
+            if (resultados != null && !resultados.isEmpty()) {
+                ObservableList<Libros> observableResultados = FXCollections.observableArrayList(resultados);
+                listResultados.setItems(observableResultados);
+            } else {
+                // Manejar el caso cuando no se encuentren resultados
+                lblMensaje.setText("No se encontraron resultados.");
+                lblMensaje.setStyle("-fx-text-fill: red;");
+            }
+        } else {
+            // Si el campo de búsqueda está vacío, mostramos todos los libros disponibles
+            List<Libros> librosDisponibles = new LibrosImpl().listarLibrosDisponibles();
+            ObservableList<Libros> observableLibros = FXCollections.observableArrayList(librosDisponibles);
+            listResultados.setItems(observableLibros);
+        }
+    }
+
+
+
+    // Método auxiliar para verificar si el query es un ISBN
+    private boolean isValidIsbn(String isbn) {
+        return isbn.matches("\\d{13}|\\d{10}"); // Acepta ISBN-10 y ISBN-13
+    }
+
+
+
+
+    public void actualizarListaLibros() {
+        LibrosImpl librosDao = new LibrosImpl();
+        List<Libros> autores = librosDao.listarTodosLibros();
+
+        listLibrosEliminar.getItems().clear();
+        listLibrosModificar.getItems().clear();
+        tablaLibros.getItems().clear();
+
+        listLibrosEliminar.getItems().addAll(autores);
+        listLibrosModificar.getItems().addAll(autores);
+        tablaLibros.getItems().addAll(autores);
+    }
+
+
+    // Actualizar la tabla de libros
+    private void actualizarTabla() {
+        List<Libros> libros = new LibrosImpl().listarTodosLibros();
+        ObservableList<Libros> listaLibros = FXCollections.observableArrayList(libros);
+        tablaLibros.setItems(listaLibros);
+    }
+
+    @FXML
+    private void initialize() {
+        colTitulo.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTitulo()));
+        colISBN.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getIsbn()));
+        colAutor.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getAutor().getNombre()));  // Accedemos al nombre del autor
+
+        // Añadimos las columnas para Editorial y Año de Publicación
+        colEditorial.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEditorial()));
+        colAnioPublicacion.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getAnioPublicacion())));
+
+        actualizarTabla();
+        actualizarListaLibros();
+    }
+
 }

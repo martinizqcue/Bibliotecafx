@@ -6,21 +6,24 @@ import org.example.bibliotecafx.entities.Libros;
 import java.util.List;
 
 public interface LibrosDAO {
-    // Operación para agregar un libro
-    Libros save(Libros libro);
 
-    void agregarLibro(Libros libro);
+    boolean guardar(Libros libro);
 
-    // Operación para modificar un libro
-    void modificarLibro(Libros libro);
+    boolean modificar(Libros libro);
 
-    // Operación para eliminar un libro
-    void eliminarLibro(String isbn);
+    boolean eliminar(Libros libro);
 
-    // Operación para buscar un libro por título, autor o ISBN
-    Libros buscarLibro(String criterio);
+    List<Libros> buscarPorTitulo(String titulo);
 
-    // Operación para listar todos los libros no prestados
+    List<Libros> buscarPorAutor(String autor);
+
+    List<Libros> buscarPorIsbn(String isbn);
+
+    // Buscar libros por un término de búsqueda general
+    List<Libros> buscar(String query);
+
     List<Libros> listarLibrosDisponibles();
+
+    List<Libros> listarTodosLibros();
 
 }

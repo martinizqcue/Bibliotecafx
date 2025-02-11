@@ -4,6 +4,7 @@ import org.example.bibliotecafx.Util.HibernateUtil;
 import org.example.bibliotecafx.entities.Autores;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -88,4 +89,28 @@ public class AutoresImpl implements AutoresDAO {
             return false;
         }
     }
+
+    @Override
+    public Autores obtenerAutorPorNombre(String nombre) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Autores> query = session.createQuery("FROM Autores WHERE nombre = :nombreAutor", Autores.class);
+            query.setParameter("nombreAutor", nombre);
+            return query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Autores buscarPorNombre(String nombre) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Autores> query = session.createQuery("FROM Autores WHERE nombre = :nombre", Autores.class);
+            query.setParameter("nombre", nombre);
+            return query.uniqueResult();  // Retorna un único resultado si existe
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;  // Retorna null si no se encuentra el autor
+        }
+    }
+
 }

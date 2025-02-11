@@ -15,5 +15,5 @@ public interface AutoresDAO {
 
     boolean delete(Autores Autor);
 
-
+    Autores obtenerAutorPorNombre(String nombre);
 }

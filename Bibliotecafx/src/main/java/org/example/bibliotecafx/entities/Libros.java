@@ -4,24 +4,24 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "libros")
+@Table(name = "Libros")
 public class Libros implements Serializable {
 
     @Id
     @Column(length = 13)
     private String isbn;
 
-    @Column(nullable = false)
+
     private String titulo;
 
     @ManyToOne
-    @JoinColumn(name = "autor_id", nullable = false)
+    @JoinColumn(name = "autor_id")
     private Autores autor;
 
-    @Column(nullable = false)
+
     private String editorial;
 
-    @Column(name = "anio_publicacion", nullable = false)
+    @Column(name = "anio_publicacion")
     private int anioPublicacion;
 
     // Constructor vacío
@@ -81,12 +81,6 @@ public class Libros implements Serializable {
     // Método toString
     @Override
     public String toString() {
-        return "Libro{" +
-                "ISBN='" + isbn + '\'' +
-                ", Título='" + titulo + '\'' +
-                ", Autor=" + (autor != null ? autor.getNombre() : "Desconocido") +
-                ", Editorial='" + editorial + '\'' +
-                ", Año de Publicación=" + anioPublicacion +
-                '}';
+        return " ISBN:" + isbn + " Titulo:" + titulo + " Autor:" +  autor + " Editorial:" + editorial + " AñoPublicacion:" + anioPublicacion;
     }
 }
