@@ -67,11 +67,6 @@ public class Socios implements Serializable {
     // Método toString
     @Override
     public String toString() {
-        return "Socio{" +
-                "ID=" + id +
-                ", Nombre='" + nombre + '\'' +
-                ", Dirección='" + direccion + '\'' +
-                ", Teléfono=" + telefono +
-                '}';
+        return  "ID:" + id + " Nombre:" + nombre + " Dirección:" + direccion + " Teléfono:" + telefono;
     }
 }

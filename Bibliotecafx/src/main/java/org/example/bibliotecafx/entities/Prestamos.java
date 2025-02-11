@@ -82,12 +82,8 @@ public class Prestamos implements Serializable {
     // Método toString
     @Override
     public String toString() {
-        return "Prestamo{" +
-                "ID=" + id +
-                ", Libro='" + libro.getTitulo() + '\'' +
-                ", Socio='" + socio.getNombre() + '\'' +
-                ", Fecha de Préstamo=" + fechaPrestamo +
-                ", Fecha de Devolución=" + (fechaDevolucion != null ? fechaDevolucion : "No devuelto") +
-                '}';
+        return "ID:" + id +
+                " Libro:" + libro.getTitulo() + " Socio:" + socio.getNombre() + " Fecha de Préstamo:" + fechaPrestamo +
+                " Fecha de Devolución:" + (fechaDevolucion != null ? fechaDevolucion : "No devuelto");
     }
 }

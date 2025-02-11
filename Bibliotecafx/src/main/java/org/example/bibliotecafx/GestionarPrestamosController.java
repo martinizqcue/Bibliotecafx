@@ -40,6 +40,7 @@ public class GestionarPrestamosController {
 
     private PrestamosImpl prestamosImpl;
 
+    @FXML
     public void initialize() {
         prestamosImpl = new PrestamosImpl();
 
@@ -48,10 +49,18 @@ public class GestionarPrestamosController {
         cargarSocios();
         cargarSociosHistorial();
 
-        // Configurar la tabla de libros prestados
+        // Configurar las tablas
         configurarTablaPrestamos();
-        cargarHistorial();
+        configurarTablaHistorial();
+
+        // Configurar listener para cargar historial cuando se selecciona un socio
+        cmbSocioHistorial.valueProperty().addListener((observable, oldValue, newValue) -> cargarHistorial());
+
+        // Cargar libros prestados actualmente al iniciar
+        actualizarTablaPrestamos();
     }
+
+
 
     @FXML
     private void volver() throws Exception {
@@ -126,4 +135,19 @@ public class GestionarPrestamosController {
             tablaHistorial.getItems().addAll(historial);
         }
     }
+
+    @FXML
+    private void configurarTablaHistorial() {
+        TableColumn<Prestamos, String> colLibro = (TableColumn<Prestamos, String>) tablaHistorial.getColumns().get(0);
+        colLibro.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLibro().getTitulo()));
+
+        TableColumn<Prestamos, String> colFechaPrestamo = (TableColumn<Prestamos, String>) tablaHistorial.getColumns().get(1);
+        colFechaPrestamo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaPrestamo().toString()));
+
+        TableColumn<Prestamos, String> colFechaDevolucion = (TableColumn<Prestamos, String>) tablaHistorial.getColumns().get(2);
+        colFechaDevolucion.setCellValueFactory(cellData -> new SimpleStringProperty(
+                cellData.getValue().getFechaDevolucion() != null ? cellData.getValue().getFechaDevolucion().toString() : "No devuelto"));
+    }
+
+
 }

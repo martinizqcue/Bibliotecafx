@@ -24,19 +24,19 @@
                 <Tab text="Registrar Préstamo">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="667.0">
-                            <Label fx:id="lblMensaje" layoutX="263.0" layoutY="257.0" prefHeight="45.0" prefWidth="262.0" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: green; -fx-font-family: 'Segoe UI', sans-serif; -fx-padding: 10px;" text="" />
+                            <Label fx:id="lblMensaje" layoutX="263.0" layoutY="257.0" prefHeight="45.0" prefWidth="262.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: green; -fx-font-family: 'Segoe UI', sans-serif; -fx-padding: 10px;" text="" />
                             <children>
-                                <Label layoutX="184.0" layoutY="100.0" text="Libros:" />
-                                <ComboBox fx:id="cmbLibro" layoutX="333.0" layoutY="100.0" prefWidth="200.0" />
+                                <Label layoutX="184.0" layoutY="50.0" text="Libros:" />
+                                <ComboBox fx:id="cmbLibro" layoutX="333.0" layoutY="50.0" prefWidth="200.0" />
 
-                                <Label layoutX="184.0" layoutY="140.0" text="Socios:" />
-                                <ComboBox fx:id="cmbSocio" layoutX="333.0" layoutY="140.0" prefWidth="200.0" />
+                                <Label layoutX="184.0" layoutY="100.0" text="Socios:" />
+                                <ComboBox fx:id="cmbSocio" layoutX="333.0" layoutY="100.0" prefWidth="200.0" />
 
-                                <Label layoutX="184.0" layoutY="200.0" text="Fecha de Préstamo:" />
-                                <DatePicker fx:id="dpFechaPrestamo" layoutX="333.0" layoutY="200.0" prefWidth="200.0" />
+                                <Label layoutX="184.0" layoutY="150.0" text="Fecha de Préstamo:" />
+                                <DatePicker fx:id="dpFechaPrestamo" layoutX="333.0" layoutY="150.0" prefWidth="200.0" />
 
-                                <Label layoutX="184.0" layoutY="250.0" text="Fecha de Devolución:" />
-                                <DatePicker fx:id="dpFechaDevolucion" layoutX="333.0" layoutY="250.0" prefWidth="200.0" />
+                                <Label layoutX="184.0" layoutY="200.0" text="Fecha de Devolución:" />
+                                <DatePicker fx:id="dpFechaDevolucion" layoutX="333.0" layoutY="200.0" prefWidth="200.0" />
 
                                 <Button fx:id="btnRegistrarPrestamo" layoutX="333.0" layoutY="300.0" mnemonicParsing="false" onAction="#registrarPrestamo" prefHeight="64.0" prefWidth="124.0" text="Registrar" />
                             </children>
