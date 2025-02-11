@@ -1,7 +1,9 @@
 package org.example.bibliotecafx.DAO;
 
-import org.example.bibliotecafx.entities.Prestamos;
 import org.example.bibliotecafx.Util.HibernateUtil;
+import org.example.bibliotecafx.entities.Prestamos;
+import org.example.bibliotecafx.entities.Libros;
+import org.example.bibliotecafx.entities.Socios;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -9,39 +11,48 @@ import java.util.List;
 
 public class PrestamosImpl implements PrestamosDAO {
 
-    // Método para registrar un préstamo de libro
+
+    public List<Libros> getAllLibros() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM Libros", Libros.class).list();
+        }
+    }
+
+
+    public List<Socios> getAllSocios() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM Socios", Socios.class).list();
+        }
+    }
+
+    @Override
+    public List<Prestamos> getAllPrestamos() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM Prestamos", Prestamos.class).list();
+        }
+    }
+
+    @Override
+    public List<Prestamos> getHistorialPrestamosPorSocio(Socios socio) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM Prestamos WHERE socio = :socio", Prestamos.class)
+                    .setParameter("socio", socio)
+                    .list();
+        }
+    }
+
     @Override
     public void registrarPrestamo(Prestamos prestamo) {
+        Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             session.save(prestamo);
             transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
-        }
-    }
-
-    // Método para listar los libros prestados actualmente
-    @Override
-    public List<Prestamos> listarLibrosPrestados() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM Prestamos WHERE fechaDevolucion IS NULL", Prestamos.class).list();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    // Método para listar el historial de préstamos de un socio
-    @Override
-    public List<Prestamos> listarHistorialPrestamosSocio(Integer idSocio) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM Prestamos WHERE socio.id = :idSocio", Prestamos.class)
-                    .setParameter("idSocio", idSocio)
-                    .list();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
         }
     }
 }

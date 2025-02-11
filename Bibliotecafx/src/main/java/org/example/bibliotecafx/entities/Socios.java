@@ -11,13 +11,13 @@ public class Socios implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+
     private String nombre;
 
-    @Column(nullable = false)
+
     private String direccion;
 
-    @Column(nullable = false)
+
     private Integer telefono;
 
     // Constructor vacío

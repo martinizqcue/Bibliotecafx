@@ -15,18 +15,9 @@ public class HelloController {
 
 
     @FXML
-    public void onGestionarLibros() {
+    public void onGestionarLibros() throws Exception {
 
-        try {
-            // Cargar la vista de gestionar libros
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecafx/GestionarLibros.fxml"));
-            Stage stage = new Stage();  // Nueva ventana
-            stage.setTitle("Gestionar Libros");
-            stage.setScene(new Scene(loader.load(), 600, 600));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        HelloApplication.switchScene("/org/example/bibliotecafx/GestionarLibros.fxml");
     }
 
     @FXML
@@ -36,34 +27,14 @@ public class HelloController {
     }
 
     @FXML
-    public void onGestionarSocios() {
+    public void onGestionarSocios() throws Exception {
 
-
-        try {
-            // Cargar la vista de gestionar socios
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecafx/GestionarSocios.fxml"));
-            Stage stage = new Stage();  // Nueva ventana
-            stage.setTitle("Gestionar Socios");
-            stage.setScene(new Scene(loader.load(), 600, 600));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        HelloApplication.switchScene("/org/example/bibliotecafx/GestionarSocios.fxml");
     }
 
     @FXML
-    public void onGestionarPrestamos() {
+    public void onGestionarPrestamos() throws Exception {
 
-
-        try {
-            // Cargar la vista de gestionar préstamos
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecafx/GestionarPrestamos.fxml"));
-            Stage stage = new Stage();  // Nueva ventana
-            stage.setTitle("Gestionar Préstamos");
-            stage.setScene(new Scene(loader.load(), 600, 600));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        HelloApplication.switchScene("/org/example/bibliotecafx/GestionarPrestamos.fxml");
     }
 }

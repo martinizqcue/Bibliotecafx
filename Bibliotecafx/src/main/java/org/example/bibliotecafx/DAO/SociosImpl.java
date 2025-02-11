@@ -1,87 +1,112 @@
 package org.example.bibliotecafx.DAO;
 
-import org.example.bibliotecafx.entities.Socios;
 import org.example.bibliotecafx.Util.HibernateUtil;
+
+import org.example.bibliotecafx.entities.Socios;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
 public class SociosImpl implements SociosDAO {
 
-    // Método para agregar un nuevo socio
     @Override
     public void agregarSocio(Socios socio) {
+        Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction transaction = session.beginTransaction();
-            session.save(socio);
+            transaction = session.beginTransaction();
+            session.persist(socio);
             transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
     }
 
-    // Método para modificar un socio
     @Override
-    public void modificarSocio(Socios socio) {
+    public void actualizarSocio(Socios socio) {
+        Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction transaction = session.beginTransaction();
-            session.update(socio);
+            transaction = session.beginTransaction();
+            session.merge(socio);
             transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
     }
 
-    // Método para eliminar un socio
     @Override
-    public void eliminarSocio(Integer id) {
+    public void eliminarSocio(int id) {
+        Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             Socios socio = session.get(Socios.class, id);
             if (socio != null) {
-                session.delete(socio);
-                transaction.commit();
+                session.remove(socio);
             }
+            transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
     }
 
-    // Método para buscar un socio por nombre
     @Override
-    public Socios buscarSocioPorNombre(String nombre) {
+    public Socios obtenerSocio(int id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM Socios WHERE nombre = :nombre", Socios.class)
-                    .setParameter("nombre", nombre)
-                    .uniqueResult();
+            return session.get(Socios.class, id);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    // Método para buscar un socio por número de teléfono
     @Override
-    public Socios buscarSocioPorTelefono(Integer telefono) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM Socios WHERE telefono = :telefono", Socios.class)
-                    .setParameter("telefono", telefono)
-                    .uniqueResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    // Método para listar todos los socios
-    @Override
-    public List<Socios> listarSocios() {
+    public List<Socios> obtenerTodosLosSocios() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("FROM Socios", Socios.class).list();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public List<Socios> findByNombre(String nombre) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "FROM Socios WHERE nombre LIKE :nombre";
+            Query<Socios> query = session.createQuery(hql, Socios.class);
+            query.setParameter("nombre", "%" + nombre + "%");
+            return query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    public List<Socios> findByTelefono(int telefono) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "FROM Socios WHERE telefono = :telefono";
+            Query<Socios> query = session.createQuery(hql, Socios.class);
+            query.setParameter("telefono", telefono);  // Usamos el parámetro de tipo int
+            return query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+
+    public List<Socios> findAll() {
+        return obtenerTodosLosSocios();
     }
 }

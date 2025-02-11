@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "prestamos")
+@Table(name = "Prestamos")
 public class Prestamos implements Serializable {
 
     @Id
@@ -13,14 +13,14 @@ public class Prestamos implements Serializable {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "libro_isbn", nullable = false)
+    @JoinColumn(name = "libro_isbn")
     private Libros libro;
 
     @ManyToOne
-    @JoinColumn(name = "socio_id", nullable = false)
+    @JoinColumn(name = "socio_id")
     private Socios socio;
 
-    @Column(name = "fecha_prestamo", nullable = false)
+    @Column(name = "fecha_prestamo")
     private LocalDate fechaPrestamo;
 
     @Column(name = "fecha_devolucion")

@@ -1,5 +1,6 @@
 package org.example.bibliotecafx;
 
+import javafx.scene.text.Text;
 import org.example.bibliotecafx.DAO.AutoresImpl;
 import org.example.bibliotecafx.DAO.LibrosImpl;
 import org.example.bibliotecafx.entities.Autores;
@@ -196,8 +197,24 @@ public class GestionarLibrosController {
         colEditorial.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEditorial()));
         colAnioPublicacion.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getAnioPublicacion())));
 
+        listLibrosModificar.setOnMouseClicked(event -> seleccionarLibroModificar());
         actualizarTabla();
         actualizarListaLibros();
+    }
+
+    @FXML
+    public void seleccionarLibroModificar() {
+        libroSeleccionado = listLibrosModificar.getSelectionModel().getSelectedItem();
+        if (libroSeleccionado != null) {
+            txtTituloMod.setText(libroSeleccionado.getTitulo());
+            txtISBNMod.setText(libroSeleccionado.getIsbn());
+            txtAutorMod.setText(libroSeleccionado.getAutor().getNombre());
+            txtEditorialMod.setText(libroSeleccionado.getEditorial());
+            // Parseo: convertir el año de publicación (int) a String y setearlo en el TextField
+            txtAnioPublicacionMod.setText(String.valueOf(libroSeleccionado.getAnioPublicacion()));
+
+
+        }
     }
 
 }

@@ -13,16 +13,16 @@
     <Label fx:id="welcomeText" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Bienvenido a la Biblioteca" />
 
     <!-- Botón para gestionar libros -->
-    <Button onAction="#onGestionarLibros" prefHeight="48.0" prefWidth="144.0" style="-fx-font-size: 14px; -fx-padding: 10px;" styleClass="button" text="Gestionar Libros" />
+    <Button onAction="#onGestionarLibros" prefHeight="48.0" prefWidth="175.0" style="-fx-font-size: 14px; -fx-padding: 10px;" styleClass="button" text="Gestionar Libros" />
 
     <!-- Botón para gestionar autores -->
-    <Button onAction="#onGestionarAutores" prefHeight="48.0" prefWidth="146.0" style="-fx-font-size: 14px; -fx-padding: 10px;" styleClass="button" text="Gestionar Autores" />
+    <Button onAction="#onGestionarAutores" prefHeight="48.0" prefWidth="175.0" style="-fx-font-size: 14px; -fx-padding: 10px;" styleClass="button" text="Gestionar Autores" />
 
     <!-- Botón para gestionar socios -->
-    <Button onAction="#onGestionarSocios" prefHeight="48.0" prefWidth="146.0" style="-fx-font-size: 14px; -fx-padding: 10px;" styleClass="button" text="Gestionar Socios" />
+    <Button onAction="#onGestionarSocios" prefHeight="48.0" prefWidth="175.0" style="-fx-font-size: 14px; -fx-padding: 10px;" styleClass="button" text="Gestionar Socios" />
 
     <!-- Botón para gestionar préstamos -->
-    <Button onAction="#onGestionarPrestamos" prefHeight="48.0" prefWidth="146.0" style="-fx-font-size: 14px; -fx-padding: 10px;" styleClass="button" text="Gestionar Préstamos" />
+    <Button onAction="#onGestionarPrestamos" prefHeight="48.0" prefWidth="175.0" style="-fx-font-size: 14px; -fx-padding: 10px;" styleClass="button" text="Gestionar Préstamos" />
 
     <!-- Área para mostrar mensajes o resultados -->
     <Label fx:id="statusLabel" style="-fx-font-size: 14px; -fx-text-fill: gray;" text="Selecciona una opción para comenzar" />

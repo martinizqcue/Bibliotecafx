@@ -1,17 +1,14 @@
 package org.example.bibliotecafx.DAO;
 
+import org.example.bibliotecafx.entities.Libros;
 import org.example.bibliotecafx.entities.Prestamos;
+import org.example.bibliotecafx.entities.Socios;
 
 import java.util.List;
 
 public interface PrestamosDAO {
 
-    // Método para registrar un préstamo de libro
+    List<Prestamos> getAllPrestamos();
+    List<Prestamos> getHistorialPrestamosPorSocio(Socios socio);
     void registrarPrestamo(Prestamos prestamo);
-
-    // Método para listar los libros prestados actualmente
-    List<Prestamos> listarLibrosPrestados();
-
-    // Método para listar el historial de préstamos de un socio
-    List<Prestamos> listarHistorialPrestamosSocio(Integer idSocio);
 }
